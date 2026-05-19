@@ -1,0 +1,130 @@
+:root {
+  color-scheme: light;
+  color-scheme: only light;
+  --app-bg: #ffffff;
+  --app-ink: #0f172a;
+  --app-muted: #667085;
+  --app-blue: #2563ff;
+  --app-cyan: #3ac8ff;
+  --app-mint: #22c983;
+  --app-coral: #ff7a59;
+  --app-sun: #ffbf66;
+  --glass-border: rgba(226, 232, 240, 0.9);
+  --glass-fill: rgba(255, 255, 255, 0.88);
+  --nav-fill: rgba(255, 255, 255, 0.92);
+}
+
+html {
+  background: var(--app-bg);
+  color-scheme: light;
+  color-scheme: only light;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+  color: var(--app-ink);
+  background-color: var(--app-bg);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 255, 0.08), transparent 24%),
+    radial-gradient(circle at 85% 12%, rgba(58, 200, 255, 0.08), transparent 22%),
+    radial-gradient(circle at 20% 85%, rgba(255, 122, 89, 0.05), transparent 26%),
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 45%, #f6f9ff 100%);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 1), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.82), transparent 22%);
+}
+
+body::after {
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(180deg, transparent, black 22%, black 72%, transparent);
+}
+
+.safe-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.ios-fallback-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.ios-fallback-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88));
+  box-shadow:
+    0 20px 60px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+}
+
+.ios-fallback-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 84px;
+  width: 84px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(58, 200, 255, 0.2), transparent 70%);
+  transform: translate(-25%, -25%);
+  pointer-events: none;
+}
+
+.ios-tabbar {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.92);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.ios-tab-item {
+  position: relative;
+  z-index: 1;
+  color: rgba(71, 84, 103, 0.72);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.ios-tab-item:hover {
+  color: rgba(15, 23, 42, 0.82);
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.ios-tab-item.active {
+  color: #2563ff;
+  background: rgba(37, 99, 255, 0.1);
+}
+
+.ios-tab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+}

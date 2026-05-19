@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Pulse Habit" />
+    <meta name="description" content="Mobiele habit tracker PWA met lokale opslag, maandresultaten en push notifications." />
+    <title>Pulse Habit | My habits</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              iosblue: "#2563ff",
+              iosgreen: "#22c983",
+              iosgray: "#98a2b3",
+              iosbg: "#f6f8ff",
+              ink: "#0f172a",
+            },
+            boxShadow: {
+              ios: "0 24px 70px rgba(15, 23, 42, 0.16)",
+              glass: "0 24px 80px rgba(15, 23, 42, 0.10)",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body data-page="main" class="min-h-screen bg-iosbg font-display text-ink">
+    <div id="app-shell">
+      <div class="ios-fallback-shell mx-auto flex min-h-screen w-full max-w-md flex-col safe-top safe-bottom px-5">
+        <header class="px-1 pb-2 pt-1">
+          <div class="flex justify-end">
+            <button type="button" class="flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-gradient-to-br from-iosblue to-[#3ac8ff] text-white shadow-ios">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path stroke-linecap="round" d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+        </header>
+        <main class="flex-1 overflow-hidden pb-24">
+          <div class="flex h-full flex-col gap-3">
+            <section class="rounded-[1.35rem] border border-white/80 bg-white/72 p-1.5 shadow-glass backdrop-blur-2xl">
+              <div class="grid grid-cols-7 gap-1">
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] bg-iosblue/12 px-1 py-2 text-center text-iosblue">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">m</span>
+                  <span class="text-sm font-semibold">13</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-slate-200"></span>
+                </button>
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] px-1 py-2 text-center text-slate-500">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">d</span>
+                  <span class="text-sm font-semibold">14</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                </button>
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] px-1 py-2 text-center text-slate-500">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">w</span>
+                  <span class="text-sm font-semibold">15</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-slate-200"></span>
+                </button>
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] px-1 py-2 text-center text-slate-500">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">d</span>
+                  <span class="text-sm font-semibold">16</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                </button>
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] px-1 py-2 text-center text-slate-500">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">v</span>
+                  <span class="text-sm font-semibold">17</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-slate-200"></span>
+                </button>
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] px-1 py-2 text-center text-slate-500">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">z</span>
+                  <span class="text-sm font-semibold">18</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                </button>
+                <button type="button" class="flex flex-col items-center justify-center gap-1 rounded-[1rem] px-1 py-2 text-center text-slate-500">
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.14em]">z</span>
+                  <span class="text-sm font-semibold">19</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-slate-200"></span>
+                </button>
+              </div>
+            </section>
+            <section class="grid flex-1 grid-cols-2 gap-3 content-start"></section>
+          </div>
+        </main>
+        <nav class="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-md px-5 safe-bottom">
+          <div class="ios-tabbar rounded-[1.35rem] px-1.5 py-1.5">
+            <div class="grid grid-cols-2 gap-0.5">
+              <a href="./index.html" aria-current="page" class="ios-tab-item active flex flex-col items-center justify-center gap-0.5 rounded-[1rem] px-2 py-2 text-[10px] font-medium">
+                <span class="ios-tab-icon">
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="m12 3 8 6.75v9.75a1.5 1.5 0 0 1-1.5 1.5H14v-6h-4v6H5.5A1.5 1.5 0 0 1 4 19.5V9.75L12 3Z" />
+                  </svg>
+                </span>
+                Main
+              </a>
+              <a href="./activity.html" class="ios-tab-item flex flex-col items-center justify-center gap-0.5 rounded-[1rem] px-2 py-2 text-[10px] font-medium">
+                <span class="ios-tab-icon">
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5.5 19A1.5 1.5 0 0 1 4 17.5v-4A1.5 1.5 0 0 1 5.5 12h1A1.5 1.5 0 0 1 8 13.5v4A1.5 1.5 0 0 1 6.5 19h-1Zm6-7A1.5 1.5 0 0 1 10 10.5v-5A1.5 1.5 0 0 1 11.5 4h1A1.5 1.5 0 0 1 14 5.5v12a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 10 17.5v-5Zm6 7a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 17.5 8h1A1.5 1.5 0 0 1 20 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-1Z" />
+                  </svg>
+                </span>
+                Results
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <script src="./app-config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

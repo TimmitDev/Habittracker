@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Pulse Habit" />
+    <meta name="description" content="Bekijk je maandresultaten in een GitHub-achtige habit heatmap." />
+    <title>Pulse Habit | Maand resultaten</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              iosblue: "#2563ff",
+              iosgreen: "#22c983",
+              iosgray: "#98a2b3",
+              iosbg: "#f6f8ff",
+              ink: "#0f172a",
+            },
+            boxShadow: {
+              ios: "0 24px 70px rgba(15, 23, 42, 0.16)",
+              glass: "0 24px 80px rgba(15, 23, 42, 0.10)",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body data-page="activity" class="min-h-screen bg-iosbg font-display text-ink">
+    <div id="app-shell">
+      <div class="ios-fallback-shell mx-auto flex min-h-screen w-full max-w-md flex-col safe-top safe-bottom px-5">
+        <main class="flex-1 pb-24 pt-4">
+          <section class="flex justify-center">
+            <section class="ios-fallback-card w-full rounded-[1.9rem] p-4">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <button type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-500">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.5 6.5 8.5 12l6 5.5" />
+                  </svg>
+                </button>
+                <div class="rounded-full border border-white/80 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm">mei 2026</div>
+                <button type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-500">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 6.5 15.5 12l-6 5.5" />
+                  </svg>
+                </button>
+              </div>
+              <div class="grid grid-cols-7 gap-1.5 pb-2 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
+                <span>ma</span>
+                <span>di</span>
+                <span>wo</span>
+                <span>do</span>
+                <span>vr</span>
+                <span>za</span>
+                <span>zo</span>
+              </div>
+              <div class="space-y-1.5">
+                <div class="grid grid-cols-7 gap-1.5">
+                  <span class="aspect-square rounded-[0.95rem] border border-slate-100 bg-slate-50/80 text-slate-300"></span>
+                  <span class="aspect-square rounded-[0.95rem] border border-slate-100 bg-slate-50/80 text-slate-300"></span>
+                  <span class="aspect-square rounded-[0.95rem] border border-slate-100 bg-slate-50/80 text-slate-300"></span>
+                  <span class="aspect-square rounded-[0.95rem] border border-slate-100 bg-slate-50/80 text-slate-300"></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">1</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-100 text-emerald-800"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">2</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">3</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                </div>
+                <div class="grid grid-cols-7 gap-1.5">
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">4</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">5</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-200 text-emerald-900"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">6</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">7</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">8</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">9</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-100 text-emerald-800"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">10</span></span>
+                </div>
+                <div class="grid grid-cols-7 gap-1.5">
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">11</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">12</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">13</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-200 text-emerald-900"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">14</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">15</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-300 text-emerald-950"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">16</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">17</span></span>
+                </div>
+                <div class="grid grid-cols-7 gap-1.5">
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">18</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500 ring-2 ring-iosblue/35 ring-offset-2 ring-offset-white"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">19</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">20</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-200 text-emerald-900"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">21</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">22</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">23</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">24</span></span>
+                </div>
+                <div class="grid grid-cols-7 gap-1.5">
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">25</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">26</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">27</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">28</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] border border-slate-200 bg-white text-slate-500"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">29</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-100 text-emerald-800"><span class="absolute left-2 top-1.5 text-[10px] font-semibold">30</span></span>
+                  <span class="relative aspect-square rounded-[0.95rem] bg-emerald-500 text-white shadow-[0_10px_22px_rgba(34,197,94,0.20)]"><span class="absolute left-2 top-1.5 text-[10px] font-semibold text-white/80">31</span><span class="absolute bottom-1.5 right-1.5"><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg></span></span>
+                </div>
+              </div>
+              <noscript>
+                <div class="mt-4 flex items-center justify-between gap-3 rounded-[1.2rem] border border-slate-100 bg-white/80 px-4 py-3 text-sm text-slate-500">
+                  <span>dinsdag 19 mei</span>
+                  <span class="font-semibold text-slate-900">Niets gedaan</span>
+                </div>
+              </noscript>
+            </section>
+          </section>
+        </main>
+        <nav class="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-md px-5 safe-bottom">
+          <div class="ios-tabbar rounded-[1.35rem] px-1.5 py-1.5">
+            <div class="grid grid-cols-2 gap-0.5">
+              <a href="./index.html" class="ios-tab-item flex flex-col items-center justify-center gap-0.5 rounded-[1rem] px-2 py-2 text-[10px] font-medium">
+                <span class="ios-tab-icon">
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="m12 3 8 6.75v9.75a1.5 1.5 0 0 1-1.5 1.5H14v-6h-4v6H5.5A1.5 1.5 0 0 1 4 19.5V9.75L12 3Z" />
+                  </svg>
+                </span>
+                Main
+              </a>
+              <a href="./activity.html" aria-current="page" class="ios-tab-item active flex flex-col items-center justify-center gap-0.5 rounded-[1rem] px-2 py-2 text-[10px] font-medium">
+                <span class="ios-tab-icon">
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5.5 19A1.5 1.5 0 0 1 4 17.5v-4A1.5 1.5 0 0 1 5.5 12h1A1.5 1.5 0 0 1 8 13.5v4A1.5 1.5 0 0 1 6.5 19h-1Zm6-7A1.5 1.5 0 0 1 10 10.5v-5A1.5 1.5 0 0 1 11.5 4h1A1.5 1.5 0 0 1 14 5.5v12a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 10 17.5v-5Zm6 7a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 17.5 8h1A1.5 1.5 0 0 1 20 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-1Z" />
+                  </svg>
+                </span>
+                Results
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <script src="./app-config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
