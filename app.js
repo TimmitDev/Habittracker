@@ -521,7 +521,7 @@
         ${renderComposer()}
         <div class="flex h-full flex-col gap-3">
           ${renderDayPicker(overview)}
-          <section class="grid flex-1 grid-cols-2 gap-3 content-start">
+          <section class="flex flex-1 flex-col gap-3 overflow-y-auto">
             ${overview.habits
               .map(function (habit) {
                 return renderHabitCard(habit, overview);
@@ -688,11 +688,7 @@
     const week = overview.weekDates;
     const safeName = escapeHtml(habit.name);
     const completedLabel = habit.stats.completedOnSelectedDay ? "Voltooid" : "Markeer";
-    const weekdayLabels = week
-      .map(function (day) {
-        return `<span class="text-center">${formatDay(day, { weekday: "narrow" }).slice(0, 1)}</span>`;
-      })
-      .join("");
+    const icon = getHabitIcon(habit.name);
     const weekBlocks = week
       .map(function (day) {
         const isFilled = Boolean(habit.completions[day]);
@@ -712,24 +708,29 @@
       .join("");
 
     return `
-      <button type="button" data-action="toggle-habit" data-habit-id="${habit.id}" class="group aspect-square w-full overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/76 p-4 text-left shadow-glass backdrop-blur-2xl transition hover:-translate-y-0.5 hover:bg-white/82 ${habit.stats.completedOnSelectedDay ? "ring-2 ring-iosgreen/25" : ""}">
-        <div class="flex h-full flex-col justify-between">
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="max-w-[7.25rem] text-lg font-semibold leading-6 text-slate-900">${safeName}</h3>
-            <span class="mt-1 inline-flex h-3.5 w-3.5 rounded-full ${habit.stats.completedOnSelectedDay ? "bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,0.10)]" : "bg-slate-200"}"></span>
-          </div>
-          <div class="space-y-2.5">
-            <div class="grid grid-cols-7 gap-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-300">
-              ${weekdayLabels}
+      <button type="button" data-action="toggle-habit" data-habit-id="${habit.id}" class="group w-full overflow-hidden rounded-[1.6rem] border border-white/80 bg-white/76 px-4 py-3.5 text-left shadow-glass backdrop-blur-2xl transition hover:-translate-y-0.5 hover:bg-white/82 ${habit.stats.completedOnSelectedDay ? "ring-2 ring-iosgreen/25" : ""}">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.1rem] bg-gradient-to-br ${habit.color} text-white shadow-sm">
+            ${icon}
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="truncate text-base font-semibold text-slate-900">${safeName}</h3>
+              <span class="inline-flex h-6 min-w-[1.5rem] items-center justify-center rounded-full px-1.5 text-[11px] font-semibold ${habit.stats.completedOnSelectedDay ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}">
+                ${habit.stats.completedOnSelectedDay ? "Done" : "Open"}
+              </span>
             </div>
-            <div class="grid grid-cols-7 gap-1.5">
+            <div class="mt-2 grid grid-cols-7 gap-1.5">
               ${weekBlocks}
             </div>
-            <div class="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-              <span>${habit.stats.completedOnSelectedDay ? "Done" : "Open"}</span>
+            <div class="mt-2 flex items-center justify-between text-[11px] font-medium text-slate-400">
+              <span>${habit.targetPerWeek}x per week</span>
               <span>${habit.stats.streak}d streak</span>
             </div>
           </div>
+          <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${habit.stats.completedOnSelectedDay ? "bg-emerald-500 text-white shadow-[0_10px_18px_rgba(34,197,94,0.18)]" : "bg-slate-100 text-slate-400"}">
+            ${habit.stats.completedOnSelectedDay ? checkIcon() : chevronIcon("right")}
+          </span>
         </div>
         <span class="sr-only">${completedLabel}</span>
       </button>
@@ -1313,9 +1314,43 @@
     return '<svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg>';
   }
 
+  function checkIcon() {
+    return '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.5 17 19 7.5" /></svg>';
+  }
+
   function chevronIcon(direction) {
     const path = direction === "left" ? "M14.5 6.5 8.5 12l6 5.5" : "M9.5 6.5 15.5 12l-6 5.5";
     return `<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="${path}" /></svg>`;
+  }
+
+  function getHabitIcon(name) {
+    const value = String(name || "").toLowerCase();
+
+    if (/(read|book|study|learn)/.test(value)) {
+      return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path stroke-linecap="round" stroke-linejoin="round" d="M5 6.5A2.5 2.5 0 0 1 7.5 4H19v14.5A1.5 1.5 0 0 0 17.5 17H7.75A2.75 2.75 0 0 0 5 19.75V6.5Zm0 0V20" /><path stroke-linecap="round" d="M9 8h6M9 11h6" /></svg>';
+    }
+
+    if (/(walk|run|cardio|steps|jog)/.test(value)) {
+      return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="14.5" cy="5" r="2" /><path stroke-linecap="round" stroke-linejoin="round" d="m12.5 10.5 2.5-1.5 1.5 2.5 2.5 1M10 20l1.5-5 2 1.5V20M7 13l3-2.5 1-3" /></svg>';
+    }
+
+    if (/(water|drink|hydrat)/.test(value)) {
+      return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.7 3.4 5 6.3 5 9a5 5 0 1 1-10 0c0-2.7 2.3-5.6 5-9Z" /></svg>';
+    }
+
+    if (/(gym|workout|lift|stretch|yoga)/.test(value)) {
+      return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10v4M7 8v8M17 8v8M21 10v4M7 12h10" /></svg>';
+    }
+
+    if (/(sleep|bed|rest)/.test(value)) {
+      return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path stroke-linecap="round" stroke-linejoin="round" d="M4 18v-6h16v6M7 12V9a3 3 0 0 1 6 0v3" /><path stroke-linecap="round" d="M4 18h16" /></svg>';
+    }
+
+    if (/(meditat|breathe|calm|mind)/.test(value)) {
+      return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c3.5-2.5 6-5.4 6-9a3 3 0 0 0-5.2-2A3.3 3.3 0 0 0 12 7a3.3 3.3 0 0 0-.8 3A3 3 0 0 0 6 12c0 3.6 2.5 6.5 6 9Z" /></svg>';
+    }
+
+    return '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6-3.5-6-9a3.5 3.5 0 0 1 6-2.4A3.5 3.5 0 0 1 18 12c0 5.5-6 9-6 9Z" /></svg>';
   }
 
   function urlBase64ToUint8Array(base64String) {
